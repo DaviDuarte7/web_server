@@ -1,0 +1,85 @@
+html {
+    font-family: Helvetica;
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+  }
+  h1{
+    color: #3c0f76;
+    padding: 2vh;
+  }
+  p{
+    font-size: 1.5rem;
+  }
+ 
+  /* Personalização do botão do LED 1 */
+.btn-led1 {
+  background-color: #ba0000;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 40px;
+  text-decoration: none;
+  font-size: 30px;
+  margin: 2px;
+}
+.btn-led1:hover {
+  background-color: #ba0000;
+}
+
+/* Personalização do botão do LED 2 */
+.btn-led2 {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 40px;
+  text-decoration: none;
+  font-size: 30px;
+  margin: 2px;
+  background-color: #4CAF50;
+}
+.btn-led2:hover {
+  background-color: #4CAF50;
+}
+
+/* Personalização do botão do LED 3 */
+.btn-led3 {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 40px;
+  text-decoration: none;
+  font-size: 30px;  
+  margin: 2px;
+  background-color: #ffb006;
+}
+.btn-led3:hover {
+  background-color: #ffb006;
+}
+/* Personalização do botão piscar */
+.btn-piscar {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 40px;
+  text-decoration: none;
+  font-size: 30px;  
+  margin: 2px;
+  background-color: #ff00ff;
+}
+.btn-piscar {
+  background-color: #f700ff;
+}
+.btn-tempoPiscar {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 40px;
+  text-decoration: none;
+  font-size: 30px;  
+  margin: 2px;
+  background-color: #ff0040;
+}
+.btn-tempoPiscar {
+  background-color: #ff0055;
+}
