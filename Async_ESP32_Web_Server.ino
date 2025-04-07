@@ -1,23 +1,20 @@
- #include <ArduinoJson.h>
- #include <WiFi.h>
- #include <AsyncTCP.h>
- #include <ESPAsyncWebServer.h>
- #include "SPIFFS.h"
- #include "JsonController.h"
- #include "LedController.h"
- #include "HootController.h"
+  #include <Arduino.h>
+  #include <WiFi.h>
+  #include <AsyncTCP.h>
+  #include <ESPAsyncWebServer.h>
+  #include "SPIFFS.h"
+  #include "JsonController.h"
+  #include "LedController.h"
+  #include "HootController.h"
 
+void setup() {
+    Serial.begin(115200);
+    setupHoot();
+    setupleds();
+    setupRoutes(server);
+    server.begin();
+}
 
-  void setupRoutes(AsyncWebServer& server);
-  
-  void setup() {
-      Serial.begin(115200);
-       setupHoot();
-       setupleds();
-      setupRoutes(server);
-      server.begin();
-  }
-  
-    void loop(){
-   piscarLeds();
-    }
+void loop() {
+    piscarLed();
+}

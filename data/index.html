@@ -1,139 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ESP32 Web Server</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>ESP32 Web Server</title> <!-- Título da página exibido na aba do navegador -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Responsividade para dispositivos móveis -->
+    <link rel="stylesheet" type="text/css" href="style.css"> <!-- Arquivo de estilo personalizado (CSS) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> <!-- Link para o Bootstrap -->
 </head>
-<body class="bg-light">
-    <div class="container text-center mt-4">
-        <h1>ESP32 Web Server</h1>
+<body class="bg-light"> <!-- Corpo da página com fundo claro -->
+    <div class="container text-center mt-4"> <!-- Contêiner centralizado com margens de cima -->
         
-        <!-- Menu de navegação -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Controle dos LEDs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="dados.html">Ver Dados JSON</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+      <!-- Navbar com menu hambúrguer -->
+    <nav class="navbar navbar-light bg-light"> <!-- Barra de navegação -->
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
+                <span class="navbar-toggler-icon"></span> <!-- Ícone de hambúrguer para abrir o menu lateral -->
+            </button>
+            <h1 class="text-center flex-grow-1">ESP32 Web Server</h1> <!-- Título centralizado -->
+        </div>
+    </nav>
 
-        <h2>Controle dos LEDs</h2>
-    
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <h5 class="card-title">LED 1</h5>
-                        <p><button class="button btn-led1" onclick="toggleLED('/led1/on')">ON</button></p>
-                        <p><button class="button button2 btn-led1" onclick="toggleLED('/led1/off')">OFF</button></p>
-                        <p>GPIO state: <strong id="gpio-state-1">%STATE_1%</strong></p>
+    <!-- Menu lateral (offcanvas) -->
+    <div class="offcanvas offcanvas-start" id="menuLateral"> <!-- Menu lateral (offcanvas) com ID para manipulação -->
+        <div class="offcanvas-header"> <!-- Cabeçalho do menu lateral -->
+            <h5 class="offcanvas-title">Menu de dados</h5> <!-- Título do menu -->
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button> <!-- Botão para fechar o menu -->
+        </div>
+        <div class="offcanvas-body"> <!-- Corpo do menu lateral -->
+            <ul class="list-group"> <!-- Lista de itens do menu -->
+                <li class="list-group-item">
+                    <a href="dados.html" class="text-decoration-none">Ver Dados JSON</a> <!-- Link para visualizar dados JSON -->
+                </li>
+                <li class="list-group-item">
+                    <a href="/" class="text-decoration-none">Controle dos LEDs</a> <!-- Link para a página de controle dos LEDs -->
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container mt-4 text-center"> <!-- Outra seção dentro do contêiner com margem superior e texto centralizado -->
+        <h2>Controle dos LEDs</h2> <!-- Título da seção -->
+
+        <div class="row"> <!-- Linha para os cards dos LEDs -->
+            <div class="col-md-4"> <!-- Coluna para o card do LED 1 -->
+                <div class="card shadow-lg"> <!-- Card com sombra -->
+                    <div class="card-body"> <!-- Corpo do card -->
+                        <h5 class="card-title">LED 1</h5> <!-- Título do card -->
+                        <p><button class="button btn-led1" onclick="toggleLED('/led1/on')">ON</button></p> <!-- Botão para ligar o LED 1 -->
+                        <p><button class="button button2 btn-led1" onclick="toggleLED('/led1/off')">OFF</button></p> <!-- Botão para desligar o LED 1 -->
+                        <p>GPIO state: <strong id="gpio-state-1">%STATE_1%</strong></p> <!-- Estado atual do GPIO do LED 1 -->
                     </div>
                 </div>  
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4"> <!-- Coluna para o card do LED 2 -->
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <h5 class="card-title">LED 2</h5>
-                        <p><button class="button btn-led2" onclick="toggleLED('/led2/on')">ON</button></p>
-                        <p><button class="button button2 btn-led2" onclick="toggleLED('/led2/off')">OFF</button></p>
-                        <p>GPIO state: <strong id="gpio-state-2">%STATE_2%</strong></p>
+                        <p><button class="button btn-led2" onclick="toggleLED('/led2/on')">ON</button></p> <!-- Botão para ligar o LED 2 -->
+                        <p><button class="button button2 btn-led2" onclick="toggleLED('/led2/off')">OFF</button></p> <!-- Botão para desligar o LED 2 -->
+                        <p>GPIO state: <strong id="gpio-state-2">%STATE_2%</strong></p> <!-- Estado atual do GPIO do LED 2 -->
                     </div>
                 </div>  
             </div>  
 
-            <div class="col-md-4">
+            <div class="col-md-4"> <!-- Coluna para o card do LED 3 -->
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <h5 class="card-title">LED 3</h5>
-                        <p><button class="button btn-led3" onclick="toggleLED('/led3/on')">ON</button></p>
-                        <p><button class="button button2 btn-led3" onclick="toggleLED('/led3/off')">OFF</button></p>
-                        <p>GPIO state: <strong id="gpio-state-3">%STATE_3%</strong></p>
+                        <p><button class="button btn-led3" onclick="toggleLED('/led3/on')">ON</button></p> <!-- Botão para ligar o LED 3 -->
+                        <p><button class="button button2 btn-led3" onclick="toggleLED('/led3/off')">OFF</button></p> <!-- Botão para desligar o LED 3 -->
+                        <p>GPIO state: <strong id="gpio-state-3">%STATE_3%</strong></p> <!-- Estado atual do GPIO do LED 3 -->
                     </div>
                 </div>  
             </div>  
         </div>
 
-        <div class="row mt-4">
-            <div class="col-md-6 offset-md-3">
+        <div class="row mt-4"> <!-- Linha para o card de "Modo Piscar" -->
+            <div class="col-md-6 offset-md-3"> <!-- Coluna centralizada para o card -->
                 <div class="card shadow-lg">
                     <div class="card-body">
-                        <h2>Modo Piscar</h2>
-                        <p><button class="button btn-piscar" onclick="togglePiscar('/piscar/on')">Ativar Piscar</button></p>
-                        <p><button class="button button2 btn-piscar" onclick="togglePiscar('/piscar/off')">Desativar Piscar</button></p>
-                        <p>Modo Piscar: <strong id="piscar-state">%STATE_4%</strong></p>
+                        <h2>Modo Piscar</h2> <!-- Título do modo piscar -->
+                        <p><button class="button btn-piscar" onclick="togglePiscar('/piscar/on')">Ativar Piscar</button></p> <!-- Botão para ativar o modo piscar -->
+                        <p><button class="button button2 btn-piscar" onclick="togglePiscar('/piscar/off')">Desativar Piscar</button></p> <!-- Botão para desativar o modo piscar -->
+                        <p>Modo Piscar: <strong id="piscarLed-state-4">%STATE_4%</strong></p> <!-- Estado atual do modo piscar -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="row mt-4"> <!-- Linha para o card de definir tempo do piscar -->
         <div class="col-md-6 offset-md-3">  
             <div class="card shadow-lg">
                 <div class="card-body">
-                    <h2>Definir Tempo do Piscar</h2>
-                    <input type="number" id="tempoPiscar" class="form-control mb-2" placeholder="Tempo em ms">
-                    <button class="btn btn-primary" onclick="setIntervaloPiscar()">Definir Tempo</button>
+                    <h2>Definir Tempo do Piscar</h2> <!-- Título para definir o tempo -->
+                    <input type="number" id="tempoPiscar" class="form-control mb-2" placeholder="Tempo em ms"> <!-- Campo para inserir o tempo do piscar -->
+                    <button class="btn btn-primary" onclick="setIntervaloPiscar()">Definir Tempo</button> <!-- Botão para definir o intervalo do piscar -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function setIntervaloPiscar() {
-            let tempo = document.getElementById("tempoPiscar").value;
-            fetch(`/setIntervalo?tempo=${tempo}`)
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => console.error("Erro ao definir intervalo:", error));
+        function setIntervaloPiscar() { // Função que define o intervalo do piscar
+            let tempo = document.getElementById("tempoPiscar").value; // Obtém o valor inserido no campo de tempo
+            fetch(`/setIntervalo?tempo=${tempo}`) // Envia a requisição com o tempo via GET
+                .then(response => response.text()) // Aguarda a resposta como texto
+                .then(data => alert(data)) // Exibe a resposta em um alerta
+                .catch(error => console.error("Erro ao definir intervalo:", error)); // Trata erros
         }
 
-        function toggleLED(url) {
-            fetch(url).then(() => updateLEDStates());
+        function toggleLED(url) { // Função para alternar os LEDs
+            fetch(url).then(() => updateLEDStates()); // Faz a requisição e depois atualiza o estado dos LEDs
         }
 
-        function togglePiscar(url) {
-            fetch(url).then(() => updatePiscarState());
+        function togglePiscar(url) { // Função para alternar o modo piscar
+            fetch(url).then(() => updatePiscarState()); // Faz a requisição e depois atualiza o estado do piscar
         }
 
-        function updateLEDStates() {
-            fetch('/state')
-                .then(response => response.json())
+        function updateLEDStates() { // Função para atualizar os estados dos LEDs
+            fetch('/state') // Requisição para obter o estado atual dos LEDs
+                .then(response => response.json()) // Resposta em formato JSON
                 .then(state => {
-                    document.getElementById("gpio-state-1").innerText = state.LED1;
-                    document.getElementById("gpio-state-2").innerText = state.LED2;
-                    document.getElementById("gpio-state-3").innerText = state.LED3;
+                    document.getElementById("gpio-state-1").innerText = state.LED1; // Atualiza o estado do LED 1
+                    document.getElementById("gpio-state-2").innerText = state.LED2; // Atualiza o estado do LED 2
+                    document.getElementById("gpio-state-3").innerText = state.LED3; // Atualiza o estado do LED 3
                 })
-                .catch(error => console.log("Erro ao obter estados dos LEDs:", error));
+                .catch(error => console.log("Erro ao obter estados dos LEDs:", error)); // Tratamento de erros
         }
-
-        function updatePiscarState() {
-            fetch('/piscar/state')
-                .then(response => response.text())
+        
+        function updatePiscarState() { // Função para atualizar o estado do piscar
+            fetch('/state') // Requisição para obter o estado atual do piscar
+                .then(response => response.json()) // Resposta em formato JSON
                 .then(state => {
-                    document.getElementById("piscar-state").innerText = state === "Ativado" ? "Ligado" : "Desligado";
+                    document.getElementById("piscarLed-state-4").innerText = state.piscarLed === "ON" ? "Ligado" : "Desligado"; // Atualiza o estado do piscar
                 })
-                .catch(error => console.log("Erro ao obter estados do modo piscar:", error));
+                .catch(error => console.log("Erro ao obter estados do modo piscar:", error)); // Tratamento de erros
         }
 
-        setInterval(updateLEDStates, 1000);
-        setInterval(updatePiscarState, 2000);
+        setInterval(updateLEDStates, 500); // Atualiza os estados dos LEDs
+        setInterval(updatePiscarState, 505); // Atualiza o estado do piscar
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Script necessário para funcionamento do Bootstrap -->
 
 </body>
 </html>

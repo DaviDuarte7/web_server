@@ -6,9 +6,9 @@
 #include "SPIFFS.h"
 
 // Definindo as credenciais da rede Wi-Fi
-const char* ssid = "Atlantic Safaris";
-const char* password = "atlanticmarinainterna";
-AsyncWebServer server(80);
+  const char* ssid = "Atlantic Safaris";
+  const char* password = "atlanticmarinainterna";
+  AsyncWebServer server(80);
 
 void setupHoot() {
     Serial.begin(115200);
@@ -31,15 +31,19 @@ void setupHoot() {
     Serial.print("Endereço IP: ");
     Serial.println(WiFi.localIP());
 
-    // Rota para servir o HTML
+// Rota para servir o HTML
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
         request->send(SPIFFS, "/index.html", String(), false);
     });
 
-    // Rota para servir o CSS
+// Rota para servir o CSS
     server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
         request->send(SPIFFS, "/style.css", "text/css");
     });
+
+     server.on("/dados.html", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/dados.html", String(), false);
+});
 
     server.begin();
     Serial.println("Servidor iniciado.");
