@@ -1,13 +1,11 @@
+
 # arduino
 
 Material nescessario:
 
 - 3 leds
+- pin ultilizados: led1: pin32; led2: pin33; led3: pin27
 - Protoboard
 - Resistence
 - ESP32
 - wires
-- used pins:
-- Led1 - pin: 32
-- Led2 - pin: 33
-- Led3 - pin: 27

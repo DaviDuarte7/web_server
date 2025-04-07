@@ -2,60 +2,89 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Dados do JSON</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados JSON do ESP32</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body class="bg-light">
-    <div class="container text-center mt-4">
-        <h1>Dados do JSON</h1>
-        <div class="mt-4">
-            <button class="btn btn-primary" onclick="fetchJsonData()">Atualizar Dados</button>
+<body class="bg-light"> <!-- Corpo da página com fundo claro -->
+    <div class="container text-center mt-4"> <!-- Contêiner centralizado com margens de cima -->
+          <!-- Navbar com menu hambúrguer -->
+    <nav class="navbar navbar-light bg-light"> <!-- Barra de navegação -->
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
+                <span class="navbar-toggler-icon"></span> <!-- Ícone de hambúrguer para abrir o menu lateral -->
+            </button>
         </div>
+    </nav>
 
-        <div id="json-data" class="mt-4">
-            <!-- Os dados do JSON serão carregados aqui -->
+    <!-- Menu lateral (offcanvas) -->
+    <div class="offcanvas offcanvas-start" id="menuLateral"> <!-- Menu lateral (offcanvas) com ID para manipulação -->
+        <div class="offcanvas-header"> <!-- Cabeçalho do menu lateral -->
+            <h5 class="offcanvas-title">Menu de dados</h5> <!-- Título do menu -->
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button> <!-- Botão para fechar o menu -->
+        </div>
+        <div class="offcanvas-body"> <!-- Corpo do menu lateral -->
+            <ul class="list-group"> <!-- Lista de itens do menu -->
+                <li class="list-group-item">
+                    <a href="/" class="text-decoration-none">Controle dos LEDs</a> <!-- Link para a página de controle dos LEDs -->
+                </li>
+                <li class="list-group-item">
+                    <a href="dados.html" class="text-decoration-none">Ver Dados JSON</a> <!-- Link para visualizar dados JSON -->
+                </li>
+            </ul>
         </div>
     </div>
 
+        <h1>Dados do ESP32</h1>
+        <div class="mt-4" id="data-container"></div>
+    </div>
+
     <script>
-        function fetchJsonData() {
-            fetch('/dados')  // Altere esta URL conforme necessário para obter os dados JSON
+        let intervalo = 1000; // Intervalo padrão
+        let updateInterval; // Variável para armazenar o intervalo
+
+        // Função para buscar os dados do servidor
+        function fetchData() {
+            fetch('/state')
                 .then(response => response.json())
                 .then(data => {
-                    displayJsonData(data);
+                    displayData(data);
+                    
+                    // Atualiza o intervalo se ele mudou
+                    if (data.intervalo && data.intervalo !== intervalo) {
+                        intervalo = data.intervalo;
+                        restartAutoUpdate();
+                    }
                 })
-                .catch(error => console.log("Erro ao obter dados JSON:", error));
+                .catch(error => {
+                    console.error('Erro ao buscar dados:', error);
+                    document.getElementById('data-container').innerText = 'Erro ao carregar os dados.';
+                });
         }
 
-        function displayJsonData(data) {
-            let html = `
-                <table class="table table-bordered table-striped mt-4">
-                    <thead class="table-light">
-                        <tr>
-                            <th>LED</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>`;
-            
-            for (const [key, value] of Object.entries(data)) {
-                html += `
-                    <tr>
-                        <td>${key}</td>
-                        <td>${value}</td>
-                    </tr>`;
-            }
-
-            html += `
-                    </tbody>
-                </table>`;
-            
-            document.getElementById('json-data').innerHTML = html;
+        // Função para exibir os dados na página
+        function displayData(data) {
+            const container = document.getElementById('data-container');
+            container.innerHTML = `
+                <h2>Estado dos LEDs</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">LED 1: <strong>${data.LED1}</strong></li>
+                    <li class="list-group-item">LED 2: <strong>${data.LED2}</strong></li>
+                    <li class="list-group-item">LED 3: <strong>${data.LED3}</strong></li>
+                    <li class="list-group-item">Modo Piscar: <strong>${data.piscarLed}</strong></li>
+                </ul>
+            `;
         }
 
-        // Carrega os dados ao abrir a página
-        fetchJsonData();
+        // Reinicia a atualização automática sempre que o intervalo mudar
+        function restartAutoUpdate() {
+            clearInterval(updateInterval); // Para o intervalo anterior
+            updateInterval = setInterval(fetchData, intervalo); // Inicia um novo com o intervalo atualizado
+        }
+
+        // Chama a função para atualizar os dados quando a página carrega
+        fetchData();
+        restartAutoUpdate();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
