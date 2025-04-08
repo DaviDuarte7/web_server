@@ -72,7 +72,7 @@ const char* password = "SUA_SENHA";
 
 ---
 
-### 5. Fazer upload do código e verificar monitor serial
+#### 5. Fazer upload do código e verificar monitor serial
 
  - Após atualizar as credenciais de rede click em "upload"
  - Abra o Monitor Serial (configuração de baud: 115200)
