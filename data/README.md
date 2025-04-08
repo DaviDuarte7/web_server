@@ -66,7 +66,7 @@ Abra o **Gerenciador de Bibliotecas** e instale:
 
 No arquivo `HootController.h`, atualize as credenciais:
 
-```cpp
+    cpp
 const char* ssid = "NOME_DA_SUA_REDE";
 const char* password = "SUA_SENHA";
 
@@ -74,7 +74,7 @@ const char* password = "SUA_SENHA";
 
 Após ajustar a rede e carregar o código no ESP32:
 
-```plaintext
+    plaintext
 - Clique em **Upload** no Arduino IDE
 - Abra o **Monitor Serial** (configuração de baud: 115200)
 - Aguarde a conexão com o Wi-Fi
