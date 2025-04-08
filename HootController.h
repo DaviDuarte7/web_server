@@ -5,48 +5,49 @@
 #include <ESPAsyncWebServer.h>
 #include "SPIFFS.h"
 
-// Definindo as credenciais da rede Wi-Fi
-  const char* ssid = "Atlantic Safaris";
-  const char* password = "atlanticmarinainterna";
-  AsyncWebServer server(80);
+// Defining Wi-Fi credentials
+const char* ssid = "";
+const char* password = "";
+AsyncWebServer server(80);
 
 void setupHoot() {
     Serial.begin(115200);
 
     if (!SPIFFS.begin(true)) {
-        Serial.println("Erro ao montar SPIFFS!");
+        Serial.println("Failed to mount SPIFFS!");
         return;
     }
-    Serial.println("SPIFFS montado com sucesso.");
+    Serial.println("SPIFFS mounted successfully.");
 
     WiFi.begin(ssid, password);
-    Serial.print("Conectando ao WiFi...");
+    Serial.print("Connecting to WiFi...");
 
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
         Serial.print(".");
     }
 
-    Serial.println("\nWiFi Conectado!");
-    Serial.print("Endereço IP: ");
+    Serial.println("\nWiFi connected!");
+    Serial.print("IP Address: ");
     Serial.println(WiFi.localIP());
 
-// Rota para servir o HTML
+    // Route to serve HTML
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
         request->send(SPIFFS, "/index.html", String(), false);
     });
 
-// Rota para servir o CSS
+    // Route to serve CSS
     server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
         request->send(SPIFFS, "/style.css", "text/css");
     });
 
-     server.on("/dados.html", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(SPIFFS, "/dados.html", String(), false);
-});
+    // Route to serve additional HTML data page
+    server.on("/dados.html", HTTP_GET, [](AsyncWebServerRequest *request) {
+        request->send(SPIFFS, "/dados.html", String(), false);
+    });
 
     server.begin();
-    Serial.println("Servidor iniciado.");
+    Serial.println("Server started.");
 }
 
 #endif
