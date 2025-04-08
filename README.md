@@ -66,10 +66,8 @@ Abra o **Gerenciador de Bibliotecas** e instale:
 
 No arquivo `HootController.h`, atualize as credenciais:
 
-```cpp
-const char* ssid = "NOME_DA_SUA_REDE";
-const char* password = "SUA_SENHA";
----
+- `const char* ssid = "NOME_DA_SUA_REDE";`
+- `const char* password = "SUA_SENHA";`
 
 ### 5. Fazer upload do código e verificar monitor serial
 
