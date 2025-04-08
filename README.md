@@ -1,28 +1,28 @@
-# 🔌 Sistema de Controle de LEDs com ESP32
+# 🔌 LED Control System with ESP32
 
-Controle LEDs via navegador, registre ações em JSON e visualize tudo em tempo real — tudo isso hospedado direto no seu ESP32.
-
----
-
-## ✨ O que o projeto faz
-
-Este sistema permite que você controle 3 LEDs físicos conectados ao ESP32 por meio de uma interface web. Você pode:
-
-- Ligar/desligar os LEDs individualmente
-- Ativar o modo "piscar" em loop entre os LEDs
-- Verificar o estado atual de cada LED
-- Alterar o intervalo de tempo do piscar
-- Registrar automaticamente todas as ações (ligar/desligar/piscar) em um arquivo `log.json` armazenado no SPIFFS
+Control LEDs via a web browser, log actions in JSON, and visualize everything in real-time — all hosted directly on your ESP32.
 
 ---
 
-## ⚙️ Pré-requisitos
+## ✨ What the project does
 
-- Placa ESP32
+This system allows you to control 3 physical LEDs connected to the ESP32 through a web interface. You can:
+
+- Turn LEDs on/off individually
+- Activate the "blink" mode in a loop between the LEDs
+- Check the current state of each LED
+- Change the blink interval
+- Automatically log all actions (on/off/blink) into a `log.json` file stored in the SPIFFS
+
+---
+
+## ⚙️ Prerequisites
+
+- ESP32 board
 - Arduino IDE
-- Protoboard para conexão de fios e LEDs
-- Fios para conexão dos LEDs
-- Bibliotecas:
+- Breadboard for connecting wires and LEDs
+- Wires to connect the LEDs
+- Libraries:
   - `ESPAsyncWebServer`
   - `AsyncTCP`
   - `SPIFFS`
@@ -30,30 +30,30 @@ Este sistema permite que você controle 3 LEDs físicos conectados ao ESP32 por 
 
 ---
 
-## 🚀 Instalação e Execução
+## 🚀 Installation and Execution
 
-### 1. Instalar o Arduino IDE
+### 1. Install the Arduino IDE
 
-Baixe aqui:  
+Download here:  
 🔗 [https://www.arduino.cc/en/software](https://www.arduino.cc/en/software)
 
 ---
 
-### 2. Instalar suporte ao ESP32
+### 2. Install ESP32 support
 
-- Vá em: `Arquivo > Preferências`
-- No campo **"URLs Adicionais para Gerenciador de Placas"**, adicione:
+- Go to: `File > Preferences`
+- In the **"Additional Boards Manager URLs"** field, add:
 
 https://dl.espressif.com/dl/package_esp32_index.json
 
-- Logo em seguida vá em: `Ferramentas > Placa > Gerenciador de Placas`
-- Busque por “ESP32” e clique em instalar
+- Then, go to: `Tools > Board > Board Manager`
+- Search for "ESP32" and click install
 
 ---
 
-### 3. Instalar bibliotecas necessárias
+### 3. Install the necessary libraries
 
-Abra o **Gerenciador de Bibliotecas** e instale:
+Open the **Library Manager** and install:
 
 - `ESPAsyncWebServer`
 - `AsyncTCP`
@@ -62,17 +62,16 @@ Abra o **Gerenciador de Bibliotecas** e instale:
 
 ---
 
-### 4. Configurar sua rede Wi-Fi
+### 4. Configure your Wi-Fi network
 
-No arquivo `HootController.h`, atualize as credenciais:
+In the `HootController.h` file, update the credentials:
 
-- `const char* ssid = "NOME_DA_SUA_REDE";`
-- `const char* password = "SUA_SENHA";`
+- `const char* ssid = "YOUR_NETWORK_NAME";`
+- `const char* password = "YOUR_PASSWORD";`
 
-### 5. Fazer upload do código e verificar monitor serial
+### 5. Upload the code and check the serial monitor
 
-- Após atualizar as credenciais de rede click em "upload"
- - Abra o Monitor Serial (configuração de baud: 115200)
- - Aguarde o ESP32 conectar-se ao Wi-Fi
- - O endereço IP será exibido no console do Monitor Serial. Acesse a interface web abrindo o endereço IP diretamente no navegador.
----
+- After updating the network credentials, click "Upload"
+- Open the **Serial Monitor** (baud rate: 115200)
+- Wait for the ESP32 to connect to Wi-Fi
+- The IP address will be displayed in the Serial Monitor console. Access the web interface by opening the IP address directly in your browser.
