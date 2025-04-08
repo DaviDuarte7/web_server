@@ -62,7 +62,7 @@ Abra o **Gerenciador de Bibliotecas** e instale:
 
 ---
 
-### 4. Configurar sua rede Wi-Fi e realizar upload
+### 4. Configurar sua rede Wi-Fi
 
 No arquivo `HootController.h`, atualize as credenciais:
 
@@ -70,6 +70,9 @@ No arquivo `HootController.h`, atualize as credenciais:
 const char* ssid = "NOME_DA_SUA_REDE";
 const char* password = "SUA_SENHA";
 
+---
+
+### 5. Fazer upload do código.
  - Após atualizar as credenciais de rede click em "upload"
  - Abra o Monitor Serial (configuração de baud: 115200)
  - Aguarde o ESP32 conectar-se ao Wi-Fi
