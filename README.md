@@ -62,17 +62,13 @@ Abra o **Gerenciador de Bibliotecas** e instale:
 
 ---
 
-### 4. Configurar sua rede Wi-Fi
+### 4. Configurar sua rede Wi-Fi e realizar upload
 
 No arquivo `HootController.h`, atualize as credenciais:
 
 ```cpp
 const char* ssid = "NOME_DA_SUA_REDE";
 const char* password = "SUA_SENHA";
-
----
-
-#### 5. Fazer upload do código e verificar monitor serial
 
  - Após atualizar as credenciais de rede click em "upload"
  - Abra o Monitor Serial (configuração de baud: 115200)
