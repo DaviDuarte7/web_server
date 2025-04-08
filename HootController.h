@@ -6,8 +6,8 @@
 #include "SPIFFS.h"
 
 // Defining Wi-Fi credentials
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "YOUR_WIFI_NAME";
+const char* password = "YOUR_WIFI_PASSWORD";
 AsyncWebServer server(80);
 
 void setupHoot() {
